@@ -1,3 +1,9 @@
+alter session set "_ORACLE_SCRIPT" = true;
+
+create user dev identified by dev;
+grant connect, resource to dev;
+alter user dev default tablespace users quota unlimited on users;
+
 -- 게시글번호, 제목, 내용, 작성자, 조회수, 생성일자, 변경일자
 create table tbl_board (
   board_no number, -- 글번호
