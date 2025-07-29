@@ -1,22 +1,43 @@
 package com.yedam;
 
-import org.apache.ibatis.session.SqlSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.yedam.service.BoardService;
-import com.yedam.service.BoardServiceImpl;
-import com.yedam.vo.BoardVO;
+interface Controller {
+	public void exe();
+}
+
+class Sample implements Controller {
+	@Override
+	public void exe() {
+		System.out.println("Sample 클래스");
+	}
+}
 
 public class Main {
 	public static void main(String[] args) {
+		ArrayList<Book> list = new ArrayList<Book>();
+//		Book book = list.get(0);
 
-		BoardService svc = new BoardServiceImpl(); // 업무기능.
+		// 키=값
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("홍길동", 80);
+		map.put("박길동", 78);
 
-		int searchNo = 1;
+		Integer result = map.get("홍길동");
+		System.out.println(result);
 
-		// 조회. 조회수증가. => 업무(조회: 글번호조회 + 조회카운트)
-		BoardVO board = svc.searchBoard(searchNo);
+		Map<String, Controller> controls = new HashMap<String, Controller>();
+		controls.put("abc.do", new Sample());
+		controls.put("ddc.do", new Controller() {
+			@Override
+			public void exe() {
+				System.out.println("Test입니다.");
+			}
+		});
 
-		System.out.println(board.toString());
-
+		Controller val = controls.get("Sample");
+		val.exe();
 	}
 }

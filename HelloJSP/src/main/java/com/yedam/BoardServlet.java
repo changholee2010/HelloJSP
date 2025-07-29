@@ -16,7 +16,7 @@ import com.yedam.vo.BoardVO;
 // 서블릿의 실행순서.
 // 페이지: 75
 // live server:
-// client -> 웹서버(정적페이지) -> 서블릿컨테이너(톰캣) -> init() -> service()
+// client -> 웹서버(정적페이지) -> 서블릿컨테이너(톰캣) -> init() -> service() -> destory()
 @WebServlet("/board")
 public class BoardServlet extends HttpServlet {
 
