@@ -4,10 +4,14 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.mapper.BoardMapper">
 
-	<select id="selectList" resultType="board">
-	  select *
-	  from tbl_board
-	  order by board_no desc
+	<select id="selectList" resultType="board" parameterType="int">
+	  select ta.*
+	  from  (select /*+ INDEX_DESC(b PK_BOARD) */ rownum rn, b.*
+	         from tbl_board b) ta
+	  where ta.rn > (#{page} - 1) * 5
+	  <![CDATA[
+	  and   ta.rn <= #{page} * 5
+	  ]]>
 	</select>
 
 	<select id="selectBoard" parameterType="int" resultType="board">
