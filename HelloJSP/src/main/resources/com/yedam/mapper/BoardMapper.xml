@@ -4,10 +4,22 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.mapper.BoardMapper">
 
-	<select id="selectList" resultType="board" parameterType="int">
+	<select id="selectList" resultType="board" parameterType="search">
 	  select ta.*
 	  from  (select /*+ INDEX_DESC(b PK_BOARD) */ rownum rn, b.*
-	         from tbl_board b) ta
+	         from tbl_board b
+	         <where>
+	         <if test="searchCondition != null and searchCondition == 'T'.toString() ">
+	           title like '%'||#{keyword}||'%'
+	         </if>
+	         <if test="searchCondition != null and searchCondition == 'W'.toString() ">
+	           writer like '%'||#{keyword}||'%'
+	         </if>
+	         <if test="searchCondition != null and searchCondition == 'TW'.toString() ">
+	           writer like '%'||#{keyword}||'%' or title like '%'||#{keyword}||'%'
+	         </if>
+	         </where> 
+	         ) ta
 	  where ta.rn > (#{page} - 1) * 5
 	  <![CDATA[
 	  and   ta.rn <= #{page} * 5
@@ -38,5 +50,22 @@
 	  delete from tbl_board
 	  where board_no = #{boardNo}
 	</delete>
+	
+	<!-- 전체건수. -->
+	<select id="selectCount" resultType="int">
+	  select count(1)
+      from tbl_board
+      <where>
+	      <if test="searchCondition != null and searchCondition == 'T'.toString() ">
+	        title like '%'||#{keyword}||'%'
+	      </if>
+	      <if test="searchCondition != null and searchCondition == 'W'.toString() ">
+	        writer like '%'||#{keyword}||'%'
+	      </if>
+	      <if test="searchCondition != null and searchCondition == 'TW'.toString() ">
+	        writer like '%'||#{keyword}||'%' or title like '%'||#{keyword}||'%'
+	      </if>
+      </where>
+	</select>
 
 </mapper>
