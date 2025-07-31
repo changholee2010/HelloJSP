@@ -9,4 +9,11 @@
     values(#{memberId}, #{memberPw}, #{memberName})
   </insert>
 
+  <select id="selectMember" parameterType="string" resultType="member">
+    select *
+    from tbl_member
+    where member_id = #{id}
+    and   member_pw = #{pw}
+  </select>
+
 </mapper>

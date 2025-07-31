@@ -21,4 +21,9 @@ public class MemberServiceImpl implements MemberService {
 		return false; // 비정상처리
 	}
 
+	@Override
+	public MemberVO userCheck(String id, String pw) {
+		return mapper.selectMember(id, pw);
+	}
+
 }
