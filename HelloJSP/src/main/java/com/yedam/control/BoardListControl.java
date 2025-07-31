@@ -1,5 +1,6 @@
 package com.yedam.control;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class BoardListControl implements Control {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp)//
 			throws ServletException, IOException {
+
 		// 파라미터. (page&searchCondition&keyword)
 		String page = req.getParameter("page");
 		String sc = req.getParameter("searchCondition");

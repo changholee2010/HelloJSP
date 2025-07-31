@@ -1,6 +1,7 @@
 package com.yedam.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -40,6 +41,16 @@ public class BoardServiceImpl implements BoardService {
 			return true; // 정상등록
 		}
 		return false; // 비정상처리
+	}
+
+	@Override
+	public boolean registerMap(Map<String, String> map) {
+		int r = mapper.insertBoardMap(map);
+		if (r > 0) {
+			sqlSession.commit();
+			return true; // 정상처리
+		}
+		return false;
 	}
 
 	@Override

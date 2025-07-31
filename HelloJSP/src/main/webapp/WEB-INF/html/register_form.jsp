@@ -4,7 +4,7 @@
 <jsp:include page="includes/header.jsp" />
 <h3>게시글작성(register_form.jsp)</h3>
 
-<form action='addBoard.do' method='post'>
+<form action='addBoard.do' method='post' enctype="multipart/form-data">
   <input type="hidden" required name="writer" value="${logId }" class='form-control'>
   <table class='table'>
     <tr>
@@ -18,6 +18,10 @@
     <tr>
       <th>내용</th>
       <td><textarea required name="content" class='form-control'></textarea></td>
+    </tr>
+    <tr>
+      <th>img</th>
+      <td><input type="file" required name="images" class='form-control'></td>
     </tr>
     <tr>
       <td colspan='2' align='center'>

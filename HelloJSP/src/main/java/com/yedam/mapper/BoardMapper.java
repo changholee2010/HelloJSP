@@ -1,6 +1,7 @@
 package com.yedam.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.yedam.common.SearchDTO;
 import com.yedam.vo.BoardVO;
@@ -11,6 +12,7 @@ public interface BoardMapper {
 	public BoardVO selectBoard(int boardNo); // 단건조회.
 	public int updateCount(int boardNo); // 조회수 증가.
 	public int insertBoard(BoardVO board); // insert.
+	public int insertBoardMap(Map<String, String> map); // map 타입으로 insert.
 	public int deleteBoard(int boardNo); // delete.
 	public int selectCount(SearchDTO search); // 게시글 전체건수.
 	public int updateBoard(BoardVO board); // update.
