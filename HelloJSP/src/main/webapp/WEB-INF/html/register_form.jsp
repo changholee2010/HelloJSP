@@ -3,6 +3,7 @@
 
 <jsp:include page="includes/header.jsp" />
 <h3>register_form.jsp</h3>
+
 <form action='addBoard.do' method='post'>
   <table class='table'>
     <tr>
