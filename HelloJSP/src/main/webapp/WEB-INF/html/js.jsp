@@ -40,7 +40,7 @@
     </table>
   </div>
 
-  <script type="text/javascript" src='js/todo1.js'></script>
+  <script type="text/javascript" src='js/data.js'></script>
 </body>
 
 </html>

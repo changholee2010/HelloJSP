@@ -28,7 +28,6 @@ for (let i = 0; i < members.length; i++) {
 
 // 화면에 배열의 갯수만큼 회원정보를 출력하는 함수.
 function showList() {
-
 	// 반복문. forEach
 	members.forEach((elem, idx, ary) => {
 		let str = `<li>아이디: ${elem.id}, 이름: ${elem.name}, 포인트: ${elem.point}</li>`;
