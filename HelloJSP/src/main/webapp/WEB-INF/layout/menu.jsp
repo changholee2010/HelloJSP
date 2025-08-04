@@ -16,6 +16,6 @@
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="logout.do">로그아웃</a>
           </c:otherwise>
         </c:choose>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="js.do">JS연습</a>
     </div>
 </div>
