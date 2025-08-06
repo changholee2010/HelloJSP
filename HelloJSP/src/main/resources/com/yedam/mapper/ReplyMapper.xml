@@ -28,5 +28,11 @@
     insert into tbl_reply (reply_no, board_no, reply, replyer)
     values(#{replyNo}, #{boardNo}, #{reply}, #{replyer})
   </insert>
+  
+  <select id="selectCount" resultType="int">
+    select count(1)
+    from tbl_reply
+    where board_no = #{boardNo}
+  </select>
 
 </mapper>

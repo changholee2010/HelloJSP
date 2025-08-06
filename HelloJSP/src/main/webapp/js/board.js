@@ -5,10 +5,10 @@
 let page = 1; // page 변경.
 // 페이지로딩시점에 실행.
 function showReplyList() {
+	console.log('showReplyList()');
 	// 기존목록을 지우고...
 	document.querySelectorAll('div.content>ul>li')//
 		.forEach((elem, idx) => {
-			console.log(elem, idx);
 			if (idx >= 2) {
 				elem.remove();
 			}
@@ -20,11 +20,47 @@ function showReplyList() {
 				let li = makeRow(reply);
 				document.querySelector('div.content>ul').appendChild(li);
 			})
+			showPagingList();
 		}, // 두번째 param.
 		err => console.error(err)  // 세번째 param.
 	);
 } // end of showReplyList().
 showReplyList(); // 최초목록 출력.
+
+// 최초페이징 출력.
+function showPagingList() {
+	console.log('showPagingList()');
+	svc.replyTotalCount(bno,
+		result => {
+			let totalCnt = result.totalCnt;
+			let paging = new PageVO(page, totalCnt);
+
+			let pagination = document.querySelector('div.pagination');
+			pagination.innerHTML = '';
+
+			for (let p = paging.start; p <= paging.end; p++) {
+				let atag = document.createElement('a');
+				atag.innerText = p;
+				atag.href = p;
+				if (p == paging.currentPage) {
+					atag.setAttribute('class', 'active');
+				}
+				pagination.appendChild(atag);
+			}
+			document.querySelectorAll('div.footer>div.pagination>a')//
+				.forEach(atag => {
+					atag.addEventListener('click', e => {
+						e.preventDefault(); // 기본기능을 차단.
+						page = e.target.innerText;
+						// 목록그려주기.
+						showReplyList();
+					})
+				})
+		},
+		err => console.error(err)
+	)
+} // end of showPagingList().
+
 
 // 이벤트 등록.
 document.querySelector('#addReply')//
@@ -66,6 +102,7 @@ document.querySelectorAll('div.footer>div.pagination>a')//
 
 // 댓글정보를 활용해서 li>span 구조를 만들기.
 function makeRow(reply) {
+	console.log('makeRow()');
 	let li = document.createElement('li');
 	// 화면에 출력할 정보를 배열로 선언.
 	['replyNo', 'reply', 'replyer'].forEach(elem => {

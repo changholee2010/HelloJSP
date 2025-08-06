@@ -25,6 +25,7 @@ import com.yedam.control.RemoveReplyControl;
 import com.yedam.control.ReplyListControl;
 import com.yedam.control.SignFormControl;
 import com.yedam.control.SignUpControl;
+import com.yedam.control.TotalCntControl;
 
 // init - service - detroy
 // *.do -> 실행할 컨트롤.
@@ -61,6 +62,7 @@ public class FrontController extends HttpServlet {
 		map.put("/replyList.do", new ReplyListControl()); // 글번호 -> 댓글목록.
 		map.put("/removeReply.do", new RemoveReplyControl()); // 댓글삭제.
 		map.put("/addReply.do", new AddReplyControl()); // 글등록.
+		map.put("/totalReply.do", new TotalCntControl()); // 글등록.
 	}
 
 	@Override

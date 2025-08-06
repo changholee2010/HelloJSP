@@ -1,6 +1,25 @@
 /**
  * boardService.js
  */
+class PageVO {
+	// start, end, prev, next
+	constructor(currentPage, totalCount) {
+		let realEnd = Math.ceil(totalCount / 5);
+		this.currentPage = currentPage;
+		this.totalCount = totalCount;
+
+		this.end = Math.ceil(currentPage / 10) * 10;
+		this.start = this.end - 9;
+
+		this.end = this.end > realEnd ? realEnd : this.end;
+
+		this.prev = this.start > 1;
+		this.next = this.end < realEnd;
+
+	}
+}
+
+//console.log(new PageVO(23, 136));
 
 const svc = {
 	count: 20, // 속성(property)
@@ -32,4 +51,10 @@ const svc = {
 			.catch(errorCallback)
 	},
 	// 추가메소드.
+	replyTotalCount(bno, successCallback, errorCallback) {
+		fetch('totalReply.do?bno=' + bno)
+			.then(resolve => resolve.json())
+			.then(successCallback)
+			.catch(errorCallback)
+	}
 }
