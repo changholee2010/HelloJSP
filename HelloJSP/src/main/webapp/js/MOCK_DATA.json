@@ -1,7 +1,4 @@
-/**
- * data.js 
- */
-const str = `[{"id":1,"first_name":"Dulcy","last_name":"Egdell","email":"degdell0@a8.net","gender":"Female","salary":7521},
+[{"id":1,"first_name":"Dulcy","last_name":"Egdell","email":"degdell0@a8.net","gender":"Female","salary":7521},
 {"id":2,"first_name":"Batsheva","last_name":"Harbison","email":"bharbison1@wisc.edu","gender":"Genderfluid","salary":7686},
 {"id":3,"first_name":"Katherina","last_name":"Crysell","email":"kcrysell2@ocn.ne.jp","gender":"Female","salary":5751},
 {"id":4,"first_name":"Lucius","last_name":"Bullion","email":"lbullion3@wikimedia.org","gender":"Male","salary":5050},
@@ -15,16 +12,4 @@ const str = `[{"id":1,"first_name":"Dulcy","last_name":"Egdell","email":"degdell
 {"id":12,"first_name":"Chester","last_name":"Bereford","email":"cberefordb@flavors.me","gender":"Male","salary":6319},
 {"id":13,"first_name":"Delmore","last_name":"Bambrugh","email":"dbambrughc@smugmug.com","gender":"Male","salary":6029},
 {"id":14,"first_name":"Verney","last_name":"Waddingham","email":"vwaddinghamd@seattletimes.com","gender":"Male","salary":9735},
-{"id":15,"first_name":"Pamela","last_name":"Giorgio","email":"pgiorgioe@amazon.co.jp","gender":"Female","salary":6126}]`;
-// json문자열(객체) -> JSON.parse() -> 객체.
-let members = JSON.parse(str);
-
-
-let students = [{ name: "Hong", age: 20 }, { name: "Choi", age: 21 }];
-//             [{"name":"Hong","age":20},{"name":"Choi","age":21}]
-// 객체 -> JSON.stringify() -> json문자열.
-let json = JSON.stringify(students);
-//console.log(json);
-
-// 반복문(forEach) => 성별:Female 급여: 6000 이상인 사람을 출력.
-
+{"id":15,"first_name":"Pamela","last_name":"Giorgio","email":"pgiorgioe@amazon.co.jp","gender":"Female","salary":6126}]

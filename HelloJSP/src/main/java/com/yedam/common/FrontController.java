@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yedam.control.AddBoardControl;
+import com.yedam.control.AddReplyControl;
 import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
 import com.yedam.control.JSControl;
@@ -20,6 +21,8 @@ import com.yedam.control.LogoutControl;
 import com.yedam.control.ModifyBoardControl;
 import com.yedam.control.ModifyFormControl;
 import com.yedam.control.RegisterControl;
+import com.yedam.control.RemoveReplyControl;
+import com.yedam.control.ReplyListControl;
 import com.yedam.control.SignFormControl;
 import com.yedam.control.SignUpControl;
 
@@ -50,19 +53,25 @@ public class FrontController extends HttpServlet {
 		map.put("/loginForm.do", new LoginFormControl()); // 로그인화면.
 		map.put("/login.do", new LoginControl()); // 로그인.
 		map.put("/logout.do", new LogoutControl()); // 로그아웃.
-		
+
 		// 기타.
 		map.put("/js.do", new JSControl());
+
+		// 댓글관련.
+		map.put("/replyList.do", new ReplyListControl()); // 글번호 -> 댓글목록.
+		map.put("/removeReply.do", new RemoveReplyControl()); // 댓글삭제.
+		map.put("/addReply.do", new AddReplyControl()); // 글등록.
 	}
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// url vs. uri
 		// http://localhost:8080/HelloJSP/boardList.do => url
-		// /HelloJSP/boardList.do                      => uri
+		// /HelloJSP/boardList.do => uri
 		String uri = req.getRequestURI();
 		String context = req.getContextPath(); // /HelloJSP
 		String page = uri.substring(context.length()); // /boardList.do
+		System.out.println(page);
 
 		Control control = map.get(page);
 		control.execute(req, resp);
