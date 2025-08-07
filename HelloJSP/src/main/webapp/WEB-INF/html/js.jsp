@@ -71,7 +71,7 @@
     </table>
   </div>
 
-  <script type="text/javascript" src='js/ajax2.js'></script>
+  <script type="text/javascript" src='js/promise.js'></script>
 </body>
 
 </html>

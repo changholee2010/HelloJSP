@@ -34,5 +34,12 @@
     from tbl_reply
     where board_no = #{boardNo}
   </select>
+  
+  <select id="selectEvents" resultType="map">
+    select title as "title"
+          ,start_date as "start"
+          ,end_date as "end"
+    from tbl_event
+  </select>
 
 </mapper>

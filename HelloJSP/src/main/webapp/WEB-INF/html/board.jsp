@@ -101,7 +101,8 @@
   </div>
   <!-- 댓글목록. -->
   <div class="content">
-    <ul>
+  
+    <ul>   
       <li>
         <span class="col-sm-2">글번호</span>
         <span class="col-sm-5">내용</span>
@@ -115,7 +116,9 @@
         <span class="col-sm-2">user02</span>
         <span class="col-sm-2"><button>삭제</button></span>
       </li>
+
     </ul>
+
   </div>
   <!-- 댓글페이징. -->
   <div class="footer">

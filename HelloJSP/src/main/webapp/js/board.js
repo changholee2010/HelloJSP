@@ -2,6 +2,7 @@
  * board.js
  * 144 댓글 정보 => json 반환.
  */
+
 let page = 1; // page 변경.
 
 // 페이지로딩시점에 실행.
@@ -17,8 +18,18 @@ function showReplyList() {
 	svc.replyList({ bno, page }, // 첫번째 param.
 		result => {
 			result.forEach(reply => {
-				let li = makeRow(reply);
-				document.querySelector('div.content>ul').appendChild(li);
+				// insertAdjacentHTML
+				let target = document.querySelector('div.content>ul');
+				let text = `<li>
+				  <span class="col-sm-2">${reply.replyNo}</span>
+				  <span class="col-sm-5">${reply.reply}</span>
+				  <span class="col-sm-2">${reply.replyer}</span>
+				  <span class="col-sm-2">
+				    <button onclick='deleteRowFnc(event)'>삭제</button></span>
+				</li>`;
+				target.insertAdjacentHTML('beforeend', text); // position, text
+				//let li = makeRow(reply);
+				//document.querySelector('div.content>ul').appendChild(li);
 			})
 			// 페이징목록.
 			showPagingList();
@@ -34,7 +45,6 @@ function showPagingList() {
 		result => {
 			let totalCnt = result.totalCnt; // 80
 			let paging = new PageVO(page, totalCnt);
-			console.log(paging);
 
 			// parent요소.
 			let target = document.querySelector('div.pagination');
@@ -114,8 +124,7 @@ function addEvent() {
 }
 
 // 댓글정보를 활용해서 li>span 구조를 만들기.
-function makeRow2(reply) {
-	console.log('makeRow()');
+function makeRow(reply) {
 	let li = document.createElement('li');
 	// 화면에 출력할 정보를 배열로 선언.
 	['replyNo', 'reply', 'replyer'].forEach(elem => {
@@ -141,14 +150,11 @@ function makeRow2(reply) {
 } // end of makeRow.
 
 // dom활용. -> insertAdjacentHtml 활용.
-function makeRow(reply) {
-
-}
-
 
 // 데이터 삭제 이벤트 핸들러.
 function deleteRowFnc(e) {
 	let rno = e.target.parentElement.parentElement.children[0].innerText;
+	rno = e.target.closest('li').firstElementChild.innerText;
 	if (!confirm(`${rno} 번 글을 삭제하겠습니까?`)) {
 		alert('삭제를 취소했습니다.');
 		return;
@@ -157,7 +163,8 @@ function deleteRowFnc(e) {
 	svc.removeReply(rno,
 		result => {
 			if (result.retCode == 'OK') {
-				e.target.parentElement.parentElement.remove();
+				//e.target.parentElement.parentElement.remove();
+				showReplyList();
 			} else if (result.retCode == 'NG') {
 				alert('삭제실패!!');
 			} else {
@@ -167,4 +174,3 @@ function deleteRowFnc(e) {
 		err => console.error(err)
 	);
 } // end of deleteRowFnc
-

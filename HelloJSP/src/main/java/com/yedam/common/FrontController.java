@@ -14,6 +14,8 @@ import com.yedam.control.AddBoardControl;
 import com.yedam.control.AddReplyControl;
 import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
+import com.yedam.control.ChartControl;
+import com.yedam.control.EventControl;
 import com.yedam.control.JSControl;
 import com.yedam.control.LoginControl;
 import com.yedam.control.LoginFormControl;
@@ -63,6 +65,11 @@ public class FrontController extends HttpServlet {
 		map.put("/removeReply.do", new RemoveReplyControl()); // 댓글삭제.
 		map.put("/addReply.do", new AddReplyControl()); // 글등록.
 		map.put("/totalReply.do", new TotalCntControl()); // 글등록. bno, {"totalCnt": 78}
+
+		// 기타.
+		map.put("/chartData.do", new ChartControl());
+		// fullcalendar 목록.
+		map.put("/eventList.do", new EventControl()); // 이벤트목록.
 	}
 
 	@Override
