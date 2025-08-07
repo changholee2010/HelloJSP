@@ -8,5 +8,5 @@ public interface ReplyService {
 	List<ReplyVO> replyList(int boardNo, int page); // 목록.
 	boolean removeReply(int replyNo); // 삭제.
 	boolean addReply(ReplyVO reply); // 등록.
-	int replyCount(int boardNo);
+	int replyCount(int boardNo); // 댓글건수.
 }

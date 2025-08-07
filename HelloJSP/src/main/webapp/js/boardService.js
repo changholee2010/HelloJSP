@@ -1,25 +1,25 @@
 /**
  * boardService.js
  */
+
+// 페이징 계산.
 class PageVO {
-	// start, end, prev, next
-	constructor(currentPage, totalCount) {
-		let realEnd = Math.ceil(totalCount / 5);
-		this.currentPage = currentPage;
-		this.totalCount = totalCount;
+	// 생성자.
+	constructor(currPage, totalCnt) {
+		this.currPage = currPage; // currPage 필드선언.
+		this.totalCnt = totalCnt;
+		// start, end 계산.
+		this.end = Math.ceil(currPage / 10) * 10; // 10page.
+		this.start = this.end - 9; // 1page
 
-		this.end = Math.ceil(currentPage / 10) * 10;
-		this.start = this.end - 9;
-
+		let realEnd = Math.ceil(totalCnt / 5); // 3page
 		this.end = this.end > realEnd ? realEnd : this.end;
-
+		// prev, next 계산.
 		this.prev = this.start > 1;
 		this.next = this.end < realEnd;
-
 	}
-}
 
-//console.log(new PageVO(23, 136));
+}
 
 const svc = {
 	count: 20, // 속성(property)
@@ -50,7 +50,7 @@ const svc = {
 			.then(successCallback)
 			.catch(errorCallback)
 	},
-	// 추가메소드.
+	// bno에 대한 전체건수 얻는 ajax 메소드.
 	replyTotalCount(bno, successCallback, errorCallback) {
 		fetch('totalReply.do?bno=' + bno)
 			.then(resolve => resolve.json())

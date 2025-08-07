@@ -10,5 +10,5 @@ public interface ReplyMapper {
 	List<ReplyVO> replyList(@Param("boardNo") int boardNo, @Param("page") int page); // 목록.
 	int deleteReply(int replyNo); // 삭제.
 	int insertReply(ReplyVO reply); // 등록.
-	int selectCount(int boardNo);
+	int selectCount(int boardNo); // 댓글건수계산.
 }

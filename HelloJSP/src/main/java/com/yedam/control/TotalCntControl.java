@@ -14,8 +14,8 @@ public class TotalCntControl implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String bno = req.getParameter("bno");
+		// ?bno=145 => {"totalCnt": 78}
+		String bno = req.getParameter("bno"); // parameter.
 
 		ReplyService svc = new ReplyServiceImpl();
 		int cnt = svc.replyCount(Integer.parseInt(bno));

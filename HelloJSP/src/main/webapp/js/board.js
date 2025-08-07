@@ -3,9 +3,9 @@
  * 144 댓글 정보 => json 반환.
  */
 let page = 1; // page 변경.
+
 // 페이지로딩시점에 실행.
 function showReplyList() {
-	console.log('showReplyList()');
 	// 기존목록을 지우고...
 	document.querySelectorAll('div.content>ul>li')//
 		.forEach((elem, idx) => {
@@ -20,6 +20,7 @@ function showReplyList() {
 				let li = makeRow(reply);
 				document.querySelector('div.content>ul').appendChild(li);
 			})
+			// 페이징목록.
 			showPagingList();
 		}, // 두번째 param.
 		err => console.error(err)  // 세번째 param.
@@ -27,40 +28,49 @@ function showReplyList() {
 } // end of showReplyList().
 showReplyList(); // 최초목록 출력.
 
-// 최초페이징 출력.
+// 페이징목록 출력.
 function showPagingList() {
-	console.log('showPagingList()');
 	svc.replyTotalCount(bno,
 		result => {
-			let totalCnt = result.totalCnt;
+			let totalCnt = result.totalCnt; // 80
 			let paging = new PageVO(page, totalCnt);
+			console.log(paging);
 
-			let pagination = document.querySelector('div.pagination');
-			pagination.innerHTML = '';
-
+			// parent요소.
+			let target = document.querySelector('div.pagination');
+			target.innerHTML = ''; // 기존목록 삭제.
+			// 이전페이지 여부.
+			if (paging.prev) {
+				let atag = document.createElement('a');
+				atag.href = paging.start - 1;
+				atag.setAttribute('data-page', paging.start - 1);
+				atag.innerHTML = '&laquo;';
+				target.appendChild(atag);
+			}
+			// start ~ end 
 			for (let p = paging.start; p <= paging.end; p++) {
 				let atag = document.createElement('a');
-				atag.innerText = p;
-				atag.href = p;
-				if (p == paging.currentPage) {
+				atag.href = p; //setAttribute('href', p); // <a href="3">
+				atag.setAttribute('data-page', p);
+				if (p == paging.currPage) // 현재페이지의 active 지정.
 					atag.setAttribute('class', 'active');
-				}
-				pagination.appendChild(atag);
+				atag.innerText = p;
+				target.appendChild(atag); // <div class="pagination"><a/></div>
 			}
-			document.querySelectorAll('div.footer>div.pagination>a')//
-				.forEach(atag => {
-					atag.addEventListener('click', e => {
-						e.preventDefault(); // 기본기능을 차단.
-						page = e.target.innerText;
-						// 목록그려주기.
-						showReplyList();
-					})
-				})
+			// 이후페이지.
+			if (paging.next) {
+				let atag = document.createElement('a');
+				atag.href = paging.end + 1;
+				atag.setAttribute('data-page', paging.end + 1);
+				atag.innerHTML = '&raquo;';
+				target.appendChild(atag);
+			}
+			// a 태그에 클릭이벤트.
+			addEvent();
 		},
 		err => console.error(err)
-	)
-} // end of showPagingList().
-
+	);
+} // end of showPagingList();
 
 // 이벤트 등록.
 document.querySelector('#addReply')//
@@ -90,18 +100,21 @@ document.querySelector('#addReply')//
 	});
 
 // 페이징 링크에 클릭이벤트.
-document.querySelectorAll('div.footer>div.pagination>a')//
-	.forEach(atag => {
-		atag.addEventListener('click', e => {
-			e.preventDefault(); // 기본기능을 차단.
-			page = e.target.innerText;
-			// 목록그려주기.
-			showReplyList();
+function addEvent() {
+	document.querySelectorAll('div.footer>div.pagination>a')//
+		.forEach(atag => {
+			atag.addEventListener('click', e => {
+				e.preventDefault(); // 기본기능을 차단.
+				page = e.target.dataset.page; // data-page => dataset.page
+				console.log(page);
+				// 목록그려주기.
+				showReplyList();
+			})
 		})
-	})
+}
 
 // 댓글정보를 활용해서 li>span 구조를 만들기.
-function makeRow(reply) {
+function makeRow2(reply) {
 	console.log('makeRow()');
 	let li = document.createElement('li');
 	// 화면에 출력할 정보를 배열로 선언.
@@ -127,6 +140,12 @@ function makeRow(reply) {
 	return li;
 } // end of makeRow.
 
+// dom활용. -> insertAdjacentHtml 활용.
+function makeRow(reply) {
+
+}
+
+
 // 데이터 삭제 이벤트 핸들러.
 function deleteRowFnc(e) {
 	let rno = e.target.parentElement.parentElement.children[0].innerText;
@@ -148,4 +167,4 @@ function deleteRowFnc(e) {
 		err => console.error(err)
 	);
 } // end of deleteRowFnc
-// dom활용. -> insertAdjacentHtml 활용.
+
