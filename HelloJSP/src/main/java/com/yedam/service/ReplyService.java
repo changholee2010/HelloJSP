@@ -12,5 +12,6 @@ public interface ReplyService {
 	int replyCount(int boardNo); // 댓글건수.
 	// 목록, 추가, 삭제 -> ReplyServiceImpl에 구현.
 	List<Map<String, Object>> eventList();
-	
+	boolean addEvent(Map<String, String> map);
+	boolean removeEvent(String title);
 }

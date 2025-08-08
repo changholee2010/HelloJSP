@@ -49,4 +49,23 @@ public class ReplyServiceImpl implements ReplyService {
 		return mapper.selectEvents();
 	}
 
+	@Override
+	public boolean addEvent(Map<String, String> map) {
+		int r = mapper.insertEvent(map);
+		if (r > 0) {
+			sqlSession.commit();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean removeEvent(String title) {
+		int r = mapper.deleteEvent(title);
+		if (r > 0) {
+			sqlSession.commit();
+			return true;
+		}
+		return false;
+	}
 }

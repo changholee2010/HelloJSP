@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <script>
+    // 상태: pending / fulfilled / rejected
+  
+    // promise객체 then().then().then()....
+    // async, await 
+    async function asynFunction() {
+    	
+    let promise = new Promise((resolve, reject) => {
+    	setTimeout(function(){
+    		reject('Fail');
+    	}, 1000);
+    });
+    
+    let reult = await fetch('....')
+  
+    let result = await promise;
+    let result2 = await result.json();
+    let result3 = await result2();
+    
+    }
+    
+  </script>
+</body>
+</html>

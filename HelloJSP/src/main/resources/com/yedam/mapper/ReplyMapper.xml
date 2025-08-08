@@ -42,4 +42,14 @@
     from tbl_event
   </select>
 
+  <insert id="insertEvent" parameterType="map">
+    insert into tbl_event (title, start_date, end_date)
+    values (#{title}, #{start}, #{end})
+  </insert>
+  
+  <delete id="deleteEvent">
+    delete from tbl_event
+    where title = #{title}
+  </delete>
+
 </mapper>

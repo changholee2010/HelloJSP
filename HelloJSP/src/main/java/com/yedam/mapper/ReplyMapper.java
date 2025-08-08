@@ -14,6 +14,6 @@ public interface ReplyMapper {
 	int selectCount(int boardNo); // 댓글건수계산.
 	// 목록, 추가, 삭제. -> mapper.xml 에 추가.
 	List<Map<String, Object>> selectEvents();
-	int insertEvent(Map<String, Object> map);
-	int deleteEvent(Map<String, Object> map);
+	int insertEvent(Map<String, String> map);
+	int deleteEvent(String title);
 }
