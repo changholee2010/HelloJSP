@@ -39,6 +39,7 @@ fetch(url)
 searchCenterList('서울특별시');
 
 function searchCenterList(sido) {
+	const COLUMS = ['id', 'centerName', 'phoneNumber'];
 
 	fetch(url)
 		.then(resolve => resolve.json())
@@ -46,25 +47,12 @@ function searchCenterList(sido) {
 			// 기존목록 지우기.
 			document.querySelector('#list').innerHTML = '';
 			// 결과값을 활용해서 반복문(forEach)활용해서 목록생성.
-			result.data // 전체목록배열.
-				.forEach(elem => {
-					if (elem.sido == sido) { // 매개값으로 비교하기.
-						// 센터정보를 활용해서 tr>td*3 구조로 출력.
-						let tr = document.createElement('tr');
-						tr.addEventListener('click', function(e) {
-							window.open('daumapi.jsp?lat=' + elem.lat + '&lng=' + elem.lng);
-						});
-						// td 생성하기.
-						['id', 'centerName', 'phoneNumber'] // 속성배열
-							.forEach(prop => {
-								let td = document.createElement('td');
-								td.innerText = elem[prop];
-								tr.appendChild(td);
-							})
-						// 생성한 tr을 tbody에 하위요소로 등록.
-						document.getElementById('list').appendChild(tr);
-					}
-				});
+			const cols = result.data // 전체목록배열.
+				.filter(elem => elem.sido == sido)
+				.map(elem => {
+					return `<tr onclick='window.open("daumapi.jsp?lat=${elem.lat}&lng=${elem.lng}")'>${COLUMS.map(col => `<td>${elem[col]}</td>`).join('')}</tr>`;
+				}).join('');
+			document.querySelector('#list').innerHTML = cols;
 		})
 		.catch(err => console.error(err));
 
