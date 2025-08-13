@@ -77,6 +77,8 @@ public class FrontController extends HttpServlet {
 
 		// member 추가.
 		map.put("/member.do", null);
+		// product기능추가.
+		map.put("/product.do", null);
 
 	}
 
