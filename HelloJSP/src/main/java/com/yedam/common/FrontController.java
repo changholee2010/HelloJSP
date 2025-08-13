@@ -75,6 +75,8 @@ public class FrontController extends HttpServlet {
 		map.put("/addEvent.do", new AddEventControl()); // 이벤트등록. {retCode:"OK"/"NG"}
 		map.put("/removeEvent.do", new RemoveEvntControl());
 
+		// product기능추가.
+		map.put("/product.do", null);
 
 	}
 
