@@ -21,6 +21,7 @@ import com.yedam.control.JSControl;
 import com.yedam.control.LoginControl;
 import com.yedam.control.LoginFormControl;
 import com.yedam.control.LogoutControl;
+import com.yedam.control.MemberControl;
 import com.yedam.control.ModifyBoardControl;
 import com.yedam.control.ModifyFormControl;
 import com.yedam.control.RegisterControl;
@@ -75,11 +76,7 @@ public class FrontController extends HttpServlet {
 		map.put("/addEvent.do", new AddEventControl()); // 이벤트등록. {retCode:"OK"/"NG"}
 		map.put("/removeEvent.do", new RemoveEvntControl());
 
-		// member 추가.
-		map.put("/member.do", null);
-		// product기능추가.
-		map.put("/product.do", null);
-
+		map.put("/member.do", new MemberControl());
 	}
 
 	@Override
